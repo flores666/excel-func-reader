@@ -1,9 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace ExcelFuncReader.Models;
 
 public class FunctionRecord
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid ImportJobId { get; set; }
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
     public ImportJob? ImportJob { get; set; }
 
     public int RowNumber { get; set; }
