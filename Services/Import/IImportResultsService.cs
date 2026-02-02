@@ -1,6 +1,6 @@
 using ExcelFuncReader.Models;
 
-namespace ExcelFuncReader.Services;
+namespace ExcelFuncReader.Services.Import;
 
 public interface IImportResultsService
 {

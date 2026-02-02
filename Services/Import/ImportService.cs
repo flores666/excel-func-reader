@@ -1,7 +1,7 @@
 using ExcelFuncReader.Data;
-using ExcelFuncReader.Models;
+using ExcelFuncReader.Data.Entity;
 
-namespace ExcelFuncReader.Services;
+namespace ExcelFuncReader.Services.Import;
 
 public sealed class ImportService : IImportService
 {

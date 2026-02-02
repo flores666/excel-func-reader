@@ -1,4 +1,4 @@
-namespace ExcelFuncReader.Services;
+namespace ExcelFuncReader.Services.Import;
 
 public interface IImportService
 {

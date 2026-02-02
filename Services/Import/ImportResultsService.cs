@@ -1,9 +1,8 @@
 using ExcelFuncReader.Data;
 using ExcelFuncReader.Models;
-
-namespace ExcelFuncReader.Services;
-
 using Microsoft.EntityFrameworkCore;
+
+namespace ExcelFuncReader.Services.Import;
 
 public sealed class ImportResultsService : IImportResultsService
 {

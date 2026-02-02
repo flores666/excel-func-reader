@@ -1,4 +1,5 @@
 using ExcelFuncReader.Data;
+using ExcelFuncReader.Data.Entity;
 
 namespace ExcelFuncReader.Models;
 

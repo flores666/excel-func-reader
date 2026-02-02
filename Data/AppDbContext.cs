@@ -1,4 +1,4 @@
-using ExcelFuncReader.Models;
+using ExcelFuncReader.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExcelFuncReader.Data;
@@ -37,6 +37,14 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             entity.Property(record => record.CodeParentDivision).HasMaxLength(256);
             entity.Property(record => record.FunctionCode).HasMaxLength(128).IsRequired();
             entity.Property(record => record.FunctionDescription).HasMaxLength(2048).IsRequired();
+        });
+        
+        modelBuilder.Entity<ImportCursor>(e =>
+        {
+            e.ToTable("import_cursors", "func_reader");
+            e.HasKey(x => x.Id);
+            e.Property(x => x.LastValue).HasMaxLength(128);
+            e.HasIndex();
         });
     }
 }

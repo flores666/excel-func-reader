@@ -1,5 +1,7 @@
 using ExcelFuncReader.Data;
 using ExcelFuncReader.Services;
+using ExcelFuncReader.Services.ExternalImport;
+using ExcelFuncReader.Services.Import;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -16,6 +18,13 @@ builder.Services.AddScoped<ExcelParser>();
 builder.Services.AddScoped<RedisAggregator>();
 builder.Services.AddScoped<IImportService, ImportService>();
 builder.Services.AddScoped<IImportResultsService, ImportResultsService>();
+
+builder.Services.Configure<ExternalImportOptions>(
+    builder.Configuration.GetSection(ExternalImportOptions.SectionName));
+
+builder.Services.AddScoped<IExternalFunctionsReader, ExternalFunctionsReader>();
+builder.Services.AddScoped<IExternalImportService, ExternalImportService>();
+builder.Services.AddHostedService<ExternalImportHostedService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

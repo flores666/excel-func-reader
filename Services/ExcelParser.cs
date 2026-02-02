@@ -1,4 +1,5 @@
 using ExcelFuncReader.Data;
+using ExcelFuncReader.Data.Entity;
 using ExcelFuncReader.Models;
 using NPOI.SS.UserModel;
 
