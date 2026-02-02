@@ -1,3 +1,4 @@
+using ExcelFuncReader.Data;
 using ExcelFuncReader.Models;
 using StackExchange.Redis;
 

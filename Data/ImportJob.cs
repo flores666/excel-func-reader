@@ -1,4 +1,4 @@
-namespace ExcelFuncReader.Models;
+namespace ExcelFuncReader.Data;
 
 public class ImportJob
 {

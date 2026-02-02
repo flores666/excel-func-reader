@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using ExcelFuncReader.Models;
 
-namespace ExcelFuncReader.Models;
+namespace ExcelFuncReader.Data;
 
 public class FunctionRecord
 {

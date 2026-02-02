@@ -1,3 +1,5 @@
+using ExcelFuncReader.Data;
+
 namespace ExcelFuncReader.Models;
 
 public sealed record ImportResultsDto(
