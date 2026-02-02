@@ -9,6 +9,7 @@ public class ExcelParser
     {
         var records = new List<FunctionRecord>();
         var formatter = new DataFormatter();
+        var seen = new HashSet<string>();
 
         using var workbook = WorkbookFactory.Create(stream);
         var sheet = workbook.GetSheetAt(0);
@@ -21,12 +22,14 @@ public class ExcelParser
                 continue;
             }
 
-            var organizationName = GetCellValue(row, formatter, 0);
-            var organizationCode = GetCellValue(row, formatter, 1);
-            var structuralUnitName = GetCellValue(row, formatter, 2);
-            var codeStructuralUnit = GetCellValue(row, formatter, 3);
-            var functionCode = GetCellValue(row, formatter, 4);
-            var functionDescription = GetCellValue(row, formatter, 5);
+            var id = GetCellValue(row, formatter, 0);
+            var organizationName = GetCellValue(row, formatter, 1);
+            var organizationCode = GetCellValue(row, formatter, 2);
+            var structuralUnitName = GetCellValue(row, formatter, 3);
+            var codeStructuralUnit = GetCellValue(row, formatter, 4);
+            var codeParentDivision = GetCellValue(row, formatter, 5);
+            var functionCode = GetCellValue(row, formatter, 6);
+            var functionDescription = GetCellValue(row, formatter, 7);
 
             if (IsHeaderRow(rowIndex, organizationName, structuralUnitName, functionDescription))
             {
@@ -48,14 +51,22 @@ public class ExcelParser
                 continue;
             }
 
+            var key = $"{organizationCode}|{codeStructuralUnit}|{functionCode}|{codeParentDivision}";
+            if (!seen.Add(key))
+            {
+                continue;
+            }
+            
             records.Add(new FunctionRecord
             {
                 ImportJobId = importJobId,
                 RowNumber = rowIndex + 1,
+                RowId = id,
                 OrganizationName = organizationName,
                 OrganizationCode = organizationCode,
                 StructuralUnitName = structuralUnitName,
                 CodeStructuralUnit = codeStructuralUnit,
+                CodeParentDivision = codeParentDivision,
                 FunctionCode = functionCode,
                 FunctionDescription = functionDescription
             });

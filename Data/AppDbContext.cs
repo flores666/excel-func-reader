@@ -29,10 +29,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             entity.ToTable("functions", "func_reader");
             entity.HasKey(record => record.Id);
             entity.HasIndex(record => record.ImportJobId);
+            entity.Property(record => record.RowId).HasMaxLength(256);
             entity.Property(record => record.OrganizationName).HasMaxLength(512).IsRequired();
             entity.Property(record => record.OrganizationCode).HasMaxLength(256).IsRequired();
             entity.Property(record => record.StructuralUnitName).HasMaxLength(512).IsRequired();
             entity.Property(record => record.CodeStructuralUnit).HasMaxLength(256).IsRequired();
+            entity.Property(record => record.CodeParentDivision).HasMaxLength(256);
             entity.Property(record => record.FunctionCode).HasMaxLength(128).IsRequired();
             entity.Property(record => record.FunctionDescription).HasMaxLength(2048).IsRequired();
         });
