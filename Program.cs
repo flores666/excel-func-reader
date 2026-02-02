@@ -7,7 +7,8 @@ using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .UseSnakeCaseNamingConvention());
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
     ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379"));
@@ -67,7 +68,7 @@ app.MapPost("/imports", async (IFormFile file, AppDbContext dbContext, ExcelPars
     }
 
     return Results.Accepted($"/imports/{importJob.Id}/status", new { importJob.Id });
-});
+}).DisableAntiforgery();
 
 app.MapGet("/imports/{id:guid}/status", async (Guid id, AppDbContext dbContext) =>
 {
